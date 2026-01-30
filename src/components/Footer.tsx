@@ -5,13 +5,13 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 border-t border-border/50">
+    <footer className="py-12 bg-white border-t border-gray-200">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Logo & Description */}
           <div className="md:col-span-2">
             <img src={logo} alt="artificall" className="h-8 mb-4" />
-            <p className="text-muted-foreground text-sm max-w-sm">
+            <p className="text-gray-600 text-sm max-w-sm">
               Future-Driven Freelancing. Wir verbinden KI-Innovation mit 
               kreativer Exzellenz für Ihren digitalen Erfolg.
             </p>
@@ -19,13 +19,13 @@ const Footer = () => {
 
           {/* Links */}
           <div>
-            <h4 className="font-heading font-semibold mb-4">Links</h4>
+            <h4 className="font-heading font-semibold text-gray-900 mb-4">Links</h4>
             <ul className="space-y-2">
               {["Leistungen", "Preise", "Über uns", "Kontakt"].map((link) => (
                 <li key={link}>
                   <a
                     href={`#${link.toLowerCase().replace(" ", "")}`}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                    className="text-gray-600 hover:text-primary transition-colors text-sm"
                   >
                     {link}
                   </a>
@@ -36,13 +36,13 @@ const Footer = () => {
 
           {/* Legal */}
           <div>
-            <h4 className="font-heading font-semibold mb-4">Rechtliches</h4>
+            <h4 className="font-heading font-semibold text-gray-900 mb-4">Rechtliches</h4>
             <ul className="space-y-2">
               {["Impressum", "Datenschutz", "AGB"].map((link) => (
                 <li key={link}>
                   <a
                     href="#"
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                    className="text-gray-600 hover:text-primary transition-colors text-sm"
                   >
                     {link}
                   </a>
@@ -53,8 +53,8 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-muted-foreground text-sm">
+        <div className="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-600 text-sm">
             © {currentYear} artificall. Alle Rechte vorbehalten.
           </p>
           
@@ -68,7 +68,7 @@ const Footer = () => {
               <a
                 key={index}
                 href={social.href}
-                className="w-10 h-10 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+                className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-600 hover:text-primary hover:bg-primary/10 transition-colors"
               >
                 <social.icon className="w-5 h-5" />
               </a>
