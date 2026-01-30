@@ -1,4 +1,5 @@
-import { Sparkles, Target, Zap } from "lucide-react";
+import gregorImg from "@/assets/gregor-strohmayr.png";
+import simonImg from "@/assets/simon-wimmer.png";
 
 const AboutSection = () => {
   return (
@@ -9,61 +10,57 @@ const AboutSection = () => {
       <div className="absolute top-1/2 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Content */}
-          <div>
-            <h2 className="font-heading text-3xl md:text-5xl font-bold mb-6">
-              Über <span className="text-primary neon-text">artificall</span>
-            </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              Wir sind eine spezialisierte Freelancing-Agentur, die modernste KI-Technologien 
-              mit kreativem Design und technischer Exzellenz verbindet. Unser Ziel ist es, 
-              Unternehmen dabei zu helfen, ihre digitale Präsenz auf das nächste Level zu heben.
-            </p>
-            <p className="text-muted-foreground leading-relaxed mb-8">
-              Mit einem Fokus auf Innovation und Effizienz entwickeln wir maßgeschneiderte 
-              Lösungen, die nicht nur beeindrucken, sondern auch messbare Ergebnisse liefern.
-            </p>
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="font-heading text-3xl md:text-5xl font-bold mb-6">
+            Über <span className="text-primary neon-text">artificall</span>
+          </h2>
+          <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto">
+            Wir sind eine spezialisierte Freelancing-Agentur, die modernste KI-Technologien 
+            mit kreativem Design und technischer Exzellenz verbindet. Unser Ziel ist es, 
+            Unternehmen dabei zu helfen, ihre digitale Präsenz auf das nächste Level zu heben. 
+            Mit einem Fokus auf Innovation und Effizienz entwickeln wir maßgeschneiderte 
+            Lösungen, die nicht nur beeindrucken, sondern auch messbare Ergebnisse liefern.
+          </p>
+        </div>
 
-            {/* Feature Points */}
-            <div className="space-y-4">
-              {[
-                { icon: Sparkles, text: "Innovative KI-gestützte Workflows" },
-                { icon: Target, text: "Maßgeschneiderte Lösungen für jede Branche" },
-                { icon: Zap, text: "Schnelle Umsetzung & agile Methoden" },
-              ].map((item, index) => (
-                <div key={index} className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <item.icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <span className="text-foreground">{item.text}</span>
-                </div>
-              ))}
+        {/* Team Section */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* Gregor */}
+          <div className="glass-card rounded-2xl p-8 text-center animated-border">
+            <div className="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/30">
+              <img 
+                src={gregorImg} 
+                alt="Gregor Strohmayr" 
+                className="w-full h-full object-cover object-top"
+              />
             </div>
+            <h3 className="font-heading text-xl font-bold text-foreground mb-2">
+              Gregor Strohmayr
+            </h3>
+            <p className="text-primary font-medium mb-3">Founder & Developer</p>
+            <p className="text-muted-foreground text-sm">
+              Schüler an der HLW Haag<br />
+              Zweig: Kommunikations- und Mediendesign
+            </p>
           </div>
 
-          {/* Visual Element */}
-          <div className="relative">
-            <div className="glass-card rounded-2xl p-8 animated-border">
-              <div className="grid grid-cols-2 gap-6">
-                {[
-                  { value: "5+", label: "Jahre Erfahrung" },
-                  { value: "50+", label: "Erfolgreiche Projekte" },
-                  { value: "30+", label: "Zufriedene Kunden" },
-                  { value: "100%", label: "Engagement" },
-                ].map((stat, index) => (
-                  <div key={index} className="text-center p-4">
-                    <div className="text-3xl md:text-4xl font-heading font-bold text-primary mb-2">
-                      {stat.value}
-                    </div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
+          {/* Simon */}
+          <div className="glass-card rounded-2xl p-8 text-center animated-border">
+            <div className="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/30">
+              <img 
+                src={simonImg} 
+                alt="Simon Wimmer" 
+                className="w-full h-full object-cover object-top"
+              />
             </div>
-            
-            {/* Floating Accent */}
-            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/10 rounded-2xl blur-2xl" />
+            <h3 className="font-heading text-xl font-bold text-foreground mb-2">
+              Simon Wimmer
+            </h3>
+            <p className="text-primary font-medium mb-3">Founder & Sales Manager</p>
+            <p className="text-muted-foreground text-sm">
+              Schüler an der HLW Haag
+            </p>
           </div>
         </div>
       </div>
