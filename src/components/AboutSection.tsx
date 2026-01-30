@@ -25,10 +25,10 @@ const AboutSection = () => {
         </div>
 
         {/* Team Section */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
           {/* Gregor */}
-          <div className="glass-card rounded-2xl p-8 text-center animated-border">
-            <div className="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/30">
+          <div className="text-center">
+            <div className="w-48 h-48 mx-auto mb-6">
               <img 
                 src={gregorImg} 
                 alt="Gregor Strohmayr" 
@@ -46,8 +46,8 @@ const AboutSection = () => {
           </div>
 
           {/* Simon */}
-          <div className="glass-card rounded-2xl p-8 text-center animated-border">
-            <div className="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/30">
+          <div className="text-center">
+            <div className="w-48 h-48 mx-auto mb-6">
               <img 
                 src={simonImg} 
                 alt="Simon Wimmer" 
@@ -59,7 +59,8 @@ const AboutSection = () => {
             </h3>
             <p className="text-primary font-medium mb-3">Founder & Sales Manager</p>
             <p className="text-muted-foreground text-sm">
-              Schüler an der HLW Haag
+              Schüler an der HLW Haag<br />
+              Zweig: Kommunikations- und Mediendesign
             </p>
           </div>
         </div>
