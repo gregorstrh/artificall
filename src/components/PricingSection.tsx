@@ -1,0 +1,114 @@
+import { Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const plans = [
+  {
+    name: "Basic",
+    price: "499",
+    description: "Perfekt für kleine Projekte und Startups",
+    features: [
+      "1 Webseite oder Landingpage",
+      "Responsive Design",
+      "Basis SEO-Optimierung",
+      "2 Revisionsrunden",
+      "E-Mail Support",
+    ],
+    popular: false,
+  },
+  {
+    name: "Pro",
+    price: "1.299",
+    description: "Ideal für wachsende Unternehmen",
+    features: [
+      "Komplette Webanwendung",
+      "KI-Integration möglich",
+      "Erweiterte SEO & Analytics",
+      "5 Revisionsrunden",
+      "Priority Support",
+      "3 Monate Wartung inklusive",
+    ],
+    popular: true,
+  },
+  {
+    name: "Ultimate",
+    price: "2.999",
+    description: "Für maximale digitale Transformation",
+    features: [
+      "Full-Stack Entwicklung",
+      "KI-Automatisierung",
+      "Individuelle Integrationen",
+      "Unbegrenzte Revisionen",
+      "24/7 Premium Support",
+      "12 Monate Wartung inklusive",
+      "Strategieberatung",
+    ],
+    popular: false,
+  },
+];
+
+const PricingSection = () => {
+  return (
+    <section id="pricing" className="py-24 relative">
+      <div className="absolute inset-0 section-gradient rotate-180" />
+      
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4">
+            Transparente <span className="text-primary neon-text">Preise</span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Wählen Sie das Paket, das am besten zu Ihren Anforderungen passt.
+            Alle Preise zzgl. MwSt.
+          </p>
+        </div>
+
+        {/* Pricing Cards */}
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {plans.map((plan, index) => (
+            <div
+              key={index}
+              className={`glass-card rounded-2xl p-8 relative ${
+                plan.popular ? "pricing-popular" : ""
+              } hover-scale`}
+            >
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold">
+                  Beliebt
+                </div>
+              )}
+              
+              <h3 className="font-heading text-2xl font-bold mb-2">{plan.name}</h3>
+              <p className="text-muted-foreground text-sm mb-6">{plan.description}</p>
+              
+              <div className="mb-8">
+                <span className="text-4xl font-heading font-bold">{plan.price}€</span>
+                <span className="text-muted-foreground ml-2">/ Projekt</span>
+              </div>
+
+              <ul className="space-y-4 mb-8">
+                {plan.features.map((feature, featureIndex) => (
+                  <li key={featureIndex} className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-3 h-3 text-primary" />
+                    </div>
+                    <span className="text-sm text-muted-foreground">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <Button
+                variant={plan.popular ? "neon" : "outline"}
+                className="w-full"
+              >
+                Jetzt starten
+              </Button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default PricingSection;
