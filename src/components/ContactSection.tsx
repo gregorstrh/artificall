@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MessageSquare, Send } from "lucide-react";
+import { Mail, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const ContactSection = () => {
@@ -47,15 +47,7 @@ const ContactSection = () => {
                   <Mail className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="font-heading font-semibold mb-2">E-Mail</h3>
-                <p className="text-muted-foreground text-sm">info@artificall.de</p>
-              </div>
-              
-              <div className="glass-card rounded-xl p-6">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <MessageSquare className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-heading font-semibold mb-2">Live Chat</h3>
-                <p className="text-muted-foreground text-sm">Mo-Fr 9:00 - 18:00 Uhr</p>
+                <p className="text-muted-foreground text-sm">office@artificall.at</p>
               </div>
             </div>
 
