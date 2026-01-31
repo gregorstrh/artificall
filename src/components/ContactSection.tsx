@@ -4,22 +4,48 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
   const { toast } = useToast();
+  const [isSending, setIsSending] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Nachricht gesendet!",
-      description: "Wir melden uns schnellstmöglich bei Ihnen.",
-    });
-    setFormData({ name: "", email: "", message: "" });
+
+    if (isSending) return;
+    setIsSending(true);
+
+    try {
+      const { error } = await supabase.functions.invoke("send-contact-email", {
+        body: formData,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      toast({
+        title: "Nachricht gesendet!",
+        description: "Wir melden uns schnellstmöglich bei Ihnen.",
+      });
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err: any) {
+      toast({
+        title: "Senden fehlgeschlagen",
+        description:
+          err?.message ||
+          "Bitte versuchen Sie es später erneut oder schreiben Sie direkt an office@artificall.at.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -86,9 +112,17 @@ const ContactSection = () => {
                     className="bg-background/50 border-border/50 focus:border-primary resize-none"
                   />
                 </div>
-                <Button variant="neon" type="submit" className="w-full group">
-                  Nachricht senden
-                  <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <Button
+                  variant="neon"
+                  type="submit"
+                  className="w-full group"
+                  disabled={isSending}
+                >
+                  {isSending ? "Senden…" : "Nachricht senden"}
+                  <Send
+                    className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                    aria-hidden="true"
+                  />
                 </Button>
               </div>
             </form>
