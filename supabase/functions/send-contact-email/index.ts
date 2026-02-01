@@ -1,4 +1,5 @@
 import { Resend } from "npm:resend@4.1.2";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -17,6 +18,10 @@ const TO_EMAIL = "office@artificall.at";
 // Once verified, switch back to e.g. "Artificall Website <noreply@artificall.at>".
 const FROM_EMAIL = "Artificall Website <onboarding@resend.dev>";
 
+// Rate limiting configuration
+const RATE_LIMIT_WINDOW_MINUTES = 15;
+const MAX_REQUESTS_PER_WINDOW = 5;
+
 function escapeHtml(value: string) {
   return value
     .replaceAll("&", "&amp;")
@@ -24,6 +29,45 @@ function escapeHtml(value: string) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+async function checkRateLimit(supabase: ReturnType<typeof createClient>, ip: string): Promise<{ allowed: boolean; remaining: number }> {
+  const windowStart = new Date(Date.now() - RATE_LIMIT_WINDOW_MINUTES * 60 * 1000).toISOString();
+  
+  // Count requests from this IP in the current window
+  const { count, error: countError } = await supabase
+    .from("contact_rate_limits")
+    .select("*", { count: "exact", head: true })
+    .eq("ip_address", ip)
+    .gte("created_at", windowStart);
+
+  if (countError) {
+    console.error("Rate limit check error:", countError);
+    // On error, allow the request but log it
+    return { allowed: true, remaining: MAX_REQUESTS_PER_WINDOW };
+  }
+
+  const currentCount = count ?? 0;
+  const remaining = Math.max(0, MAX_REQUESTS_PER_WINDOW - currentCount);
+  
+  return { allowed: currentCount < MAX_REQUESTS_PER_WINDOW, remaining };
+}
+
+async function recordRequest(supabase: ReturnType<typeof createClient>, ip: string): Promise<void> {
+  const { error } = await supabase
+    .from("contact_rate_limits")
+    .insert({ ip_address: ip });
+
+  if (error) {
+    console.error("Failed to record rate limit entry:", error);
+  }
+
+  // Occasionally clean up old entries (1% chance per request)
+  if (Math.random() < 0.01) {
+    await supabase.rpc("cleanup_old_rate_limits").catch((err: Error) => {
+      console.error("Failed to cleanup old rate limits:", err);
+    });
+  }
 }
 
 Deno.serve(async (req) => {
@@ -41,12 +85,50 @@ Deno.serve(async (req) => {
 
   try {
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+
     if (!resendApiKey) {
       console.error("Missing RESEND_API_KEY secret");
       return new Response(JSON.stringify({ error: "Server misconfigured" }), {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
+    }
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error("Missing Supabase configuration");
+      return new Response(JSON.stringify({ error: "Server misconfigured" }), {
+        status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    // Create Supabase client with service role for rate limiting
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    // Get client IP for rate limiting
+    const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() 
+      ?? req.headers.get("x-real-ip") 
+      ?? "unknown";
+
+    // Check rate limit
+    const { allowed, remaining } = await checkRateLimit(supabase, clientIp);
+    
+    if (!allowed) {
+      console.warn(`Rate limit exceeded for IP: ${clientIp}`);
+      return new Response(
+        JSON.stringify({ error: "Zu viele Anfragen. Bitte versuchen Sie es später erneut." }),
+        {
+          status: 429,
+          headers: { 
+            "Content-Type": "application/json",
+            "Retry-After": String(RATE_LIMIT_WINDOW_MINUTES * 60),
+            "X-RateLimit-Remaining": "0",
+            ...corsHeaders 
+          },
+        }
+      );
     }
 
     const payload = (await req.json()) as Partial<ContactEmailPayload>;
@@ -68,6 +150,9 @@ Deno.serve(async (req) => {
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
+
+    // Record this request for rate limiting (before sending to count even failed attempts)
+    await recordRequest(supabase, clientIp);
 
     const resend = new Resend(resendApiKey);
     const subject = `Kontaktformular: ${name}`;
@@ -101,7 +186,11 @@ Deno.serve(async (req) => {
     console.log("Contact email sent:", data);
     return new Response(JSON.stringify({ ok: true, id: data?.id }), {
       status: 200,
-      headers: { "Content-Type": "application/json", ...corsHeaders },
+      headers: { 
+        "Content-Type": "application/json",
+        "X-RateLimit-Remaining": String(remaining - 1),
+        ...corsHeaders 
+      },
     });
   } catch (err) {
     console.error("Unhandled error in send-contact-email:", err);
