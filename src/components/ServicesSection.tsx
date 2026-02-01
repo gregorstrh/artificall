@@ -20,7 +20,7 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="py-24 relative">
+    <section id="services" className="py-12 relative">
       <div className="absolute inset-0 section-gradient" />
       
       <div className="container mx-auto px-4 relative z-10">
