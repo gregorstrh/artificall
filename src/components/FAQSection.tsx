@@ -31,11 +31,6 @@ const faqs = [
     answer:
       "Ja! Jede Website wird von uns SEO-optimiert erstellt. Das bedeutet schnelle Ladezeiten, mobile Optimierung und strukturierte Inhalte, damit Sie bei Google besser gefunden werden.",
   },
-  {
-    question: "Arbeitet ihr auch mit Unternehmen außerhalb Österreichs?",
-    answer:
-      "Absolut! Wir arbeiten mit Kunden aus dem gesamten DACH-Raum und darüber hinaus. Alle Abstimmungen können bequem online per Videocall erfolgen.",
-  },
 ];
 
 const FAQSection = () => {
