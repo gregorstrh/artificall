@@ -12,9 +12,9 @@ const faqs = [
       "Die Erstellung einer Website dauert in der Regel 1-2 Wochen, abhängig von Umfang und Komplexität. Nach einem ersten Gespräch erhalten Sie einen genauen Zeitplan.",
   },
   {
-    question: "Was kostet ein KI-Anrufagent monatlich nach den 3 Jahren?",
+    question: "Was beinhaltet der monatliche Servicepreis beim KI-Anrufagenten?",
     answer:
-      "Nach den ersten 3 Jahren, in denen wir die Telefonnummer-Kosten übernehmen, fallen je nach Anbieter ca. 5-15€ monatlich für die Telefonnummer an. Die KI-Nutzung bleibt ohne zusätzliche Kosten.",
+      "Der monatliche Servicepreis von 8,99€ deckt die Telefonnummer, Hosting und Wartung des KI-Agenten sowie regelmäßige Updates ab. So bleibt Ihr Agent immer auf dem neuesten Stand.",
   },
   {
     question: "In welchen Sprachen kann der KI-Anrufagent sprechen?",
