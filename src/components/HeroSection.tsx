@@ -18,7 +18,7 @@ const HeroSection = () => {
 
   return (
     <>
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
         {/* Animated Grid Background */}
         <div className="absolute inset-0 grid-background animate-grid" />
         
