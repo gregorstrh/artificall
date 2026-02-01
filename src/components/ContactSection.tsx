@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Send } from "lucide-react";
+import { Mail, Phone, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -74,6 +74,27 @@ const ContactSection = () => {
                 </div>
                 <h3 className="font-heading font-semibold mb-2">E-Mail</h3>
                 <p className="text-muted-foreground text-sm">office@artificall.at</p>
+              </div>
+
+              <div className="glass-card rounded-xl p-6">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                  <Phone className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-heading font-semibold mb-2">Telefon</h3>
+                <div className="space-y-1">
+                  <a 
+                    href="tel:06601913034" 
+                    className="block text-muted-foreground text-sm hover:text-primary transition-colors"
+                  >
+                    0660 1913034
+                  </a>
+                  <a 
+                    href="tel:06605752571" 
+                    className="block text-muted-foreground text-sm hover:text-primary transition-colors"
+                  >
+                    0660 5752571
+                  </a>
+                </div>
               </div>
             </div>
 
