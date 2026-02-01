@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Zap, Phone, Clock, MapPin, Stethoscope, Syringe, Heart, TestTube, Activity, Users } from "lucide-react";
+import { ArrowRight, Zap, Phone, Clock, MapPin, Stethoscope, Syringe, Heart, TestTube, Activity, Users, Sparkles } from "lucide-react";
+import { useDemoDialog } from "@/contexts/DemoDialogContext";
 
 const HeroSection = () => {
-  const [isDemoOpen, setIsDemoOpen] = useState(false);
+  const { isOpen, setIsOpen, openDemo } = useDemoDialog();
 
   const services = [
     { icon: Stethoscope, label: "Vorsorgeuntersuchungen" },
@@ -51,7 +51,7 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delay-3">
-            <Button variant="neon" size="lg" className="group" onClick={() => setIsDemoOpen(true)}>
+            <Button variant="neon" size="lg" className="group" onClick={openDemo}>
               Jetzt testen
               <ArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Button>
@@ -80,11 +80,11 @@ const HeroSection = () => {
       </section>
 
       {/* Demo Practice Dialog */}
-      <Dialog open={isDemoOpen} onOpenChange={setIsDemoOpen}>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-background border-primary/20">
           <DialogHeader>
             <div className="inline-flex items-center gap-2 glass-card px-3 py-1.5 rounded-full mb-4 w-fit">
-              <Phone size={14} className="text-primary" />
+              <Sparkles size={14} className="text-primary" />
               <span className="text-xs text-muted-foreground">Live Demo – KI-Telefonassistent</span>
             </div>
             <DialogTitle className="font-heading text-2xl md:text-3xl">
@@ -94,6 +94,26 @@ const HeroSection = () => {
           </DialogHeader>
 
           <div className="space-y-6 mt-4">
+            {/* Demo Explanation */}
+            <Card className="bg-primary/5 border-primary/20">
+              <CardContent className="p-4">
+                <div className="flex items-start gap-3">
+                  <Sparkles className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-foreground mb-1">
+                      Dies ist ein Beispiel für unseren KI-Call Agent
+                    </p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      Diese fiktive Arztpraxis demonstriert, wie unser KI-Telefonassistent 
+                      für Ihr Unternehmen arbeiten kann. Der Agent beantwortet Anrufe, 
+                      gibt Informationen zu Öffnungszeiten, Leistungen und mehr – rund um die Uhr, 
+                      professionell und ohne Wartezeit.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Welcome */}
             <p className="text-muted-foreground leading-relaxed">
               Willkommen in der Praxis für Allgemeinmedizin von Dr. Max Mustermann.
