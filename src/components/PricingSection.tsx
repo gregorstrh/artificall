@@ -21,7 +21,7 @@ const plans = [
     description: "Ideal für wachsende Unternehmen",
     features: [
       "24/7 erreichbar",
-      "Telefonnummer inklusive",
+      "Telefonnummer-Kosten 3 Jahre inklusive",
       "Übernimmt eingehende Anrufe",
       "Inkl. Termineintragung",
     ],
@@ -38,7 +38,7 @@ const plans = [
       },
       {
         title: "1 KI-Anrufagent",
-        subItems: ["24/7 erreichbar", "Telefonnummer inklusive", "Übernimmt eingehende Anrufe", "Inkl. Termineintragung"],
+        subItems: ["24/7 erreichbar", "Telefonnummer-Kosten 3 Jahre inklusive", "Übernimmt eingehende Anrufe", "Inkl. Termineintragung"],
       },
     ],
     popular: false,
