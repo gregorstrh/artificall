@@ -33,6 +33,7 @@ const plans = [
     features: [
       "1 Website oder Landingpage",
       "1 KI-Anrufagent",
+      "Kombination aus beiden Angeboten",
     ],
     popular: false,
   },
