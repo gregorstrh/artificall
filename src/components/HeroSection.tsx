@@ -60,19 +60,6 @@ const HeroSection = () => {
             </Button>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-20 max-w-2xl mx-auto animate-fade-in-delay-3">
-            {[
-              { value: "50+", label: "Projekte" },
-              { value: "100%", label: "Zufriedenheit" },
-              { value: "24/7", label: "Support" },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-heading font-bold text-primary">{stat.value}</div>
-                <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Bottom Gradient */}
