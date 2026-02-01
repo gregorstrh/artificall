@@ -1,5 +1,5 @@
 import { Resend } from "npm:resend@4.1.2";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
+import { createClient, SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -22,6 +22,11 @@ const FROM_EMAIL = "Artificall Website <onboarding@resend.dev>";
 const RATE_LIMIT_WINDOW_MINUTES = 15;
 const MAX_REQUESTS_PER_WINDOW = 5;
 
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email) && email.length <= 320;
+}
+
 function escapeHtml(value: string) {
   return value
     .replaceAll("&", "&amp;")
@@ -31,7 +36,8 @@ function escapeHtml(value: string) {
     .replaceAll("'", "&#039;");
 }
 
-async function checkRateLimit(supabase: ReturnType<typeof createClient>, ip: string): Promise<{ allowed: boolean; remaining: number }> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function checkRateLimit(supabase: SupabaseClient<any>, ip: string): Promise<{ allowed: boolean; remaining: number }> {
   const windowStart = new Date(Date.now() - RATE_LIMIT_WINDOW_MINUTES * 60 * 1000).toISOString();
   
   // Count requests from this IP in the current window
@@ -53,7 +59,8 @@ async function checkRateLimit(supabase: ReturnType<typeof createClient>, ip: str
   return { allowed: currentCount < MAX_REQUESTS_PER_WINDOW, remaining };
 }
 
-async function recordRequest(supabase: ReturnType<typeof createClient>, ip: string): Promise<void> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function recordRequest(supabase: SupabaseClient<any>, ip: string): Promise<void> {
   const { error } = await supabase
     .from("contact_rate_limits")
     .insert({ ip_address: ip });
@@ -64,9 +71,11 @@ async function recordRequest(supabase: ReturnType<typeof createClient>, ip: stri
 
   // Occasionally clean up old entries (1% chance per request)
   if (Math.random() < 0.01) {
-    await supabase.rpc("cleanup_old_rate_limits").catch((err: Error) => {
+    try {
+      await supabase.rpc("cleanup_old_rate_limits");
+    } catch (err) {
       console.error("Failed to cleanup old rate limits:", err);
-    });
+    }
   }
 }
 
@@ -137,15 +146,23 @@ Deno.serve(async (req) => {
     const message = (payload.message ?? "").trim();
 
     if (!name || !email || !message) {
-      return new Response(JSON.stringify({ error: "Missing required fields" }), {
+      return new Response(JSON.stringify({ error: "Bitte füllen Sie alle Felder aus." }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    // Validate email format
+    if (!isValidEmail(email)) {
+      return new Response(JSON.stringify({ error: "Bitte geben Sie eine gültige E-Mail-Adresse ein." }), {
         status: 400,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
     // Very small sanity checks (avoid obvious junk)
-    if (name.length > 200 || email.length > 320 || message.length > 10_000) {
-      return new Response(JSON.stringify({ error: "Payload too large" }), {
+    if (name.length > 200 || message.length > 10_000) {
+      return new Response(JSON.stringify({ error: "Eingabe zu lang." }), {
         status: 400,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
@@ -177,7 +194,7 @@ Deno.serve(async (req) => {
 
     if (error) {
       console.error("Resend error:", error);
-      return new Response(JSON.stringify({ error: error.message ?? "Send failed" }), {
+      return new Response(JSON.stringify({ error: "Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut." }), {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
@@ -195,7 +212,7 @@ Deno.serve(async (req) => {
   } catch (err) {
     console.error("Unhandled error in send-contact-email:", err);
     return new Response(
-      JSON.stringify({ error: err instanceof Error ? err.message : "Unknown error" }),
+      JSON.stringify({ error: "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut." }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
