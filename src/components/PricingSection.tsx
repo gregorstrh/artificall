@@ -32,15 +32,14 @@ const plans = [
     price: "1.899",
     description: "Für maximale digitale Transformation",
     features: [
-      "1 Website oder Landingpage",
-      "1 KI-Anrufagent",
-      "Responsive Design",
-      "SEO-Optimierung",
-      "Nach Ihren Wünschen designed",
-      "24/7 erreichbar",
-      "Telefonnummer inklusive",
-      "Übernimmt eingehende Anrufe",
-      "Inkl. Termineintragung",
+      {
+        title: "1 Website oder Landingpage",
+        subItems: ["Responsive Design", "SEO-Optimierung", "Nach Ihren Wünschen designed"],
+      },
+      {
+        title: "1 KI-Anrufagent",
+        subItems: ["24/7 erreichbar", "Telefonnummer inklusive", "Übernimmt eingehende Anrufe", "Inkl. Termineintragung"],
+      },
     ],
     popular: false,
   },
@@ -96,14 +95,36 @@ const PricingSection = () => {
               </div>
 
               <ul className="space-y-4 mb-8">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-3 h-3 text-primary" />
-                    </div>
-                    <span className="text-sm text-muted-foreground">{feature}</span>
-                  </li>
-                ))}
+                {plan.features.map((feature, featureIndex) => {
+                  if (typeof feature === "string") {
+                    return (
+                      <li key={featureIndex} className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Check className="w-3 h-3 text-primary" />
+                        </div>
+                        <span className="text-sm text-muted-foreground">{feature}</span>
+                      </li>
+                    );
+                  }
+                  return (
+                    <li key={featureIndex} className="space-y-2">
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Check className="w-3 h-3 text-primary" />
+                        </div>
+                        <span className="text-sm text-foreground font-medium">{feature.title}</span>
+                      </div>
+                      <ul className="ml-8 space-y-1">
+                        {feature.subItems.map((subItem, subIndex) => (
+                          <li key={subIndex} className="text-xs text-muted-foreground flex items-center gap-2">
+                            <span className="w-1 h-1 rounded-full bg-primary/50" />
+                            {subItem}
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  );
+                })}
               </ul>
 
               <Button
