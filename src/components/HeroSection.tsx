@@ -55,8 +55,8 @@ const HeroSection = () => {
               Jetzt testen
               <ArrowRight className="group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="outline" size="lg">
-              Kontakt aufnehmen
+            <Button variant="outline" size="lg" asChild>
+              <a href="#contact">Kontakt aufnehmen</a>
             </Button>
           </div>
 
