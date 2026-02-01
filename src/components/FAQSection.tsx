@@ -17,24 +17,24 @@ const faqs = [
       "Nach den ersten 3 Jahren, in denen wir die Telefonnummer-Kosten übernehmen, fallen je nach Anbieter ca. 5-15€ monatlich für die Telefonnummer an. Die KI-Nutzung bleibt ohne zusätzliche Kosten.",
   },
   {
-    question: "Kann ich den KI-Anrufagenten selbst anpassen?",
+    question: "In welchen Sprachen kann der KI-Anrufagent sprechen?",
     answer:
-      "Ja! Sie erhalten Zugang zu einem Dashboard, in dem Sie Begrüßungstexte, Geschäftszeiten und häufige Fragen selbst anpassen können. Für größere Änderungen stehen wir Ihnen gerne zur Verfügung.",
+      "Unser KI-Anrufagent beherrscht Deutsch, Englisch und viele weitere Sprachen. Er erkennt automatisch die Sprache des Anrufers und antwortet entsprechend – ideal für internationale Kunden.",
   },
   {
-    question: "Welche Zahlungsmethoden akzeptiert ihr?",
+    question: "Wie viele Anrufe kann der KI-Agent gleichzeitig bearbeiten?",
     answer:
-      "Wir akzeptieren Überweisung, PayPal und Kreditkarte. Die Zahlung erfolgt nach Projektabschluss – Sie zahlen erst, wenn Sie zufrieden sind.",
+      "Der KI-Agent kann unbegrenzt viele Anrufe gleichzeitig entgegennehmen. Kein Anrufer muss mehr in einer Warteschleife warten – jeder wird sofort bedient.",
   },
   {
-    question: "Bietet ihr auch Support nach der Fertigstellung?",
+    question: "Wird meine Website auch auf Google gefunden?",
     answer:
-      "Selbstverständlich! Nach der Fertigstellung bieten wir 30 Tage kostenlosen Support für kleinere Anpassungen. Danach können Sie optional einen Wartungsvertrag abschließen.",
+      "Ja! Jede Website wird von uns SEO-optimiert erstellt. Das bedeutet schnelle Ladezeiten, mobile Optimierung und strukturierte Inhalte, damit Sie bei Google besser gefunden werden.",
   },
   {
-    question: "Sind die Preise einmalig oder monatlich?",
+    question: "Arbeitet ihr auch mit Unternehmen außerhalb Österreichs?",
     answer:
-      "Alle angegebenen Preise sind einmalige Projektkosten. Es gibt keine versteckten monatlichen Gebühren – außer Sie wünschen optionale Zusatzleistungen wie Hosting oder Wartung.",
+      "Absolut! Wir arbeiten mit Kunden aus dem gesamten DACH-Raum und darüber hinaus. Alle Abstimmungen können bequem online per Videocall erfolgen.",
   },
 ];
 
