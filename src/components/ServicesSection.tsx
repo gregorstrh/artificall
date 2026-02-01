@@ -1,4 +1,4 @@
-import { Bot, Globe, Palette, Cog } from "lucide-react";
+import { Bot, Globe, Palette } from "lucide-react";
 
 const services = [
   {
@@ -15,11 +15,6 @@ const services = [
     icon: Palette,
     title: "Branding & Design",
     description: "Einzigartige Markenidentitäten und UI/UX-Design, die Ihre Zielgruppe begeistern.",
-  },
-  {
-    icon: Cog,
-    title: "Prozessoptimierung",
-    description: "Analyse und Optimierung Ihrer digitalen Prozesse für maximale Effizienz.",
   },
 ];
 
