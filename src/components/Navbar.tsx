@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/artificall-logo.png";
+import { useDemoDialog } from "@/contexts/DemoDialogContext";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openDemo } = useDemoDialog();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +46,7 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <Button variant="neon" size="sm">
+          <Button variant="neon" size="sm" onClick={openDemo}>
             Jetzt starten
           </Button>
         </div>
@@ -71,7 +73,7 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <Button variant="neon" className="w-full mt-4">
+          <Button variant="neon" className="w-full mt-4" onClick={() => { openDemo(); setIsMobileMenuOpen(false); }}>
             Jetzt starten
           </Button>
         </div>
