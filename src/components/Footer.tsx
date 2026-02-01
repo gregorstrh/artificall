@@ -62,7 +62,7 @@ const Footer = () => {
           <div className="flex gap-4">
             {[
               { icon: Instagram, href: "https://instagram.com/artificall.at/" },
-              { icon: Linkedin, href: "#" },
+              { icon: Linkedin, href: "https://www.linkedin.com/company/artificall-gesbr/" },
               { icon: Github, href: "#" },
             ].map((social, index) => (
               <a
