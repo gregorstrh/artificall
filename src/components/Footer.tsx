@@ -1,4 +1,4 @@
-import { Github, Instagram, Linkedin } from "lucide-react";
+import { Instagram, Linkedin } from "lucide-react";
 import logo from "@/assets/artificall-logo.png";
 
 const Footer = () => {
@@ -63,7 +63,6 @@ const Footer = () => {
             {[
               { icon: Instagram, href: "https://instagram.com/artificall.at/" },
               { icon: Linkedin, href: "https://www.linkedin.com/company/artificall-gesbr/" },
-              { icon: Github, href: "#" },
             ].map((social, index) => (
               <a
                 key={index}
