@@ -98,7 +98,7 @@ const PricingSection = () => {
                 {plan.monthlyPrice && (
                   <div className="mt-2">
                     <span className="text-xl font-heading font-semibold text-primary">{plan.monthlyPrice}€</span>
-                    <span className="text-muted-foreground ml-2 text-sm">/ Monat Service</span>
+                    <span className="text-muted-foreground ml-2 text-sm">monatl. Service</span>
                   </div>
                 )}
               </div>
