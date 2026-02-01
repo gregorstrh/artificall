@@ -73,7 +73,12 @@ const ContactSection = () => {
                   <Mail className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="font-heading font-semibold mb-2">E-Mail</h3>
-                <p className="text-muted-foreground text-sm">office@artificall.at</p>
+                <a 
+                  href="mailto:office@artificall.at" 
+                  className="text-muted-foreground text-sm hover:text-primary transition-colors"
+                >
+                  office@artificall.at
+                </a>
               </div>
 
               <div className="glass-card rounded-xl p-6">
