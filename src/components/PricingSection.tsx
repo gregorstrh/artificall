@@ -24,7 +24,7 @@ const plans = [
       "Telefonnummer-Kosten (3 Jahre inklusive)",
       "Übernimmt eingehende Anrufe",
       "Inkl. Termineintragung",
-      "Telefonatdauer-Kosten selbst zu zahlen",
+      "Gesprächskosten nach Verbrauch",
     ],
     popular: true,
   },
@@ -39,7 +39,7 @@ const plans = [
       },
       {
         title: "1 KI-Anrufagent",
-        subItems: ["24/7 erreichbar", "Telefonnummer-Kosten (3 Jahre inklusive)", "Übernimmt eingehende Anrufe", "Inkl. Termineintragung", "Telefonatdauer-Kosten selbst zu zahlen"],
+        subItems: ["24/7 erreichbar", "Telefonnummer-Kosten (3 Jahre inklusive)", "Übernimmt eingehende Anrufe", "Inkl. Termineintragung", "Gesprächskosten nach Verbrauch"],
       },
     ],
     popular: false,
