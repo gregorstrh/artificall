@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Instagram, Linkedin } from "lucide-react";
 import logo from "@/assets/artificall-logo.png";
 
 const Footer = () => {
@@ -61,7 +61,7 @@ const Footer = () => {
           {/* Social Links */}
           <div className="flex gap-4">
             {[
-              { icon: Twitter, href: "#" },
+              { icon: Instagram, href: "https://instagram.com/artificall" },
               { icon: Linkedin, href: "#" },
               { icon: Github, href: "#" },
             ].map((social, index) => (
