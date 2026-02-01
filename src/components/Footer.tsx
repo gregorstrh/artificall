@@ -21,13 +21,18 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-gray-900 mb-4">Links</h4>
             <ul className="space-y-2">
-              {["Leistungen", "Preise", "Über uns", "Kontakt"].map((link) => (
-                <li key={link}>
+              {[
+                { label: "Leistungen", href: "#services" },
+                { label: "Preise", href: "#pricing" },
+                { label: "Über uns", href: "#about" },
+                { label: "Kontakt", href: "#contact" },
+              ].map((link) => (
+                <li key={link.label}>
                   <a
-                    href={`#${link.toLowerCase().replace(" ", "")}`}
+                    href={link.href}
                     className="text-gray-600 hover:text-primary transition-colors text-sm"
                   >
-                    {link}
+                    {link.label}
                   </a>
                 </li>
               ))}
