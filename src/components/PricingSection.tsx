@@ -18,19 +18,19 @@ const plans = [
   {
     name: "KI-Anrufagent",
     price: "1.499",
+    monthlyPrice: "8,99",
     description: "Ideal für wachsende Unternehmen",
     features: [
       "24/7 erreichbar",
-      "Telefonnummer-Kosten (3 Jahre inklusive)",
       "Übernimmt eingehende Anrufe",
       "Inkl. Termineintragung",
-      "Exkl. Gesprächskosten",
     ],
     popular: true,
   },
   {
     name: "Website + KI-Anrufagent",
     price: "1.899",
+    monthlyPrice: "8,99",
     description: "Für maximale digitale Transformation",
     features: [
       {
@@ -39,7 +39,7 @@ const plans = [
       },
       {
         title: "1 KI-Anrufagent",
-        subItems: ["24/7 erreichbar", "Telefonnummer-Kosten (3 Jahre inklusive)", "Übernimmt eingehende Anrufe", "Inkl. Termineintragung", "Exkl. Gesprächskosten"],
+        subItems: ["24/7 erreichbar", "Übernimmt eingehende Anrufe", "Inkl. Termineintragung"],
       },
     ],
     popular: false,
@@ -91,8 +91,16 @@ const PricingSection = () => {
               <p className="text-muted-foreground text-sm mb-6">{plan.description}</p>
               
               <div className="mb-8">
-                <span className="text-4xl font-heading font-bold">{plan.price}€</span>
-                <span className="text-muted-foreground ml-2">/ Projekt</span>
+                <div>
+                  <span className="text-4xl font-heading font-bold">{plan.price}€</span>
+                  <span className="text-muted-foreground ml-2">/ Projekt</span>
+                </div>
+                {plan.monthlyPrice && (
+                  <div className="mt-2">
+                    <span className="text-xl font-heading font-semibold text-primary">{plan.monthlyPrice}€</span>
+                    <span className="text-muted-foreground ml-2 text-sm">/ Monat Service</span>
+                  </div>
+                )}
               </div>
 
               <ul className="space-y-4 mb-8">
