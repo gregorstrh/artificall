@@ -46,8 +46,8 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <Button variant="neon" size="sm" onClick={openDemo}>
-            Jetzt starten
+          <Button variant="neon" size="sm" asChild>
+            <a href="#contact">Jetzt starten</a>
           </Button>
         </div>
 
@@ -73,8 +73,8 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <Button variant="neon" className="w-full mt-4" onClick={() => { openDemo(); setIsMobileMenuOpen(false); }}>
-            Jetzt starten
+          <Button variant="neon" className="w-full mt-4" asChild>
+            <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>Jetzt starten</a>
           </Button>
         </div>
       )}
