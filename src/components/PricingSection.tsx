@@ -1,6 +1,5 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
 
 const plans = [
   {
@@ -47,13 +46,8 @@ const plans = [
 ];
 
 const PricingSection = () => {
-  const { toast } = useToast();
-
   const handleStartClick = () => {
-    toast({
-      title: "Bald verfügbar",
-      description: "Die Zahlungsfunktion wird in Kürze freigeschaltet. Kontaktieren Sie uns gerne direkt!",
-    });
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
