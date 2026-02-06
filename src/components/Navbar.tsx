@@ -26,10 +26,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/70 backdrop-blur-xl backdrop-saturate-150 shadow-lg border-b border-white/10 py-3"
-          : "bg-background/50 backdrop-blur-md backdrop-saturate-125 py-6"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
+        isScrolled ? "shadow-md py-3" : "py-6"
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
@@ -43,7 +41,7 @@ const Navbar = () => {
             <a
               key={link.href}
               href={link.href}
-              className="text-foreground/80 hover:text-primary transition-colors duration-300 font-medium"
+              className="text-gray-700 hover:text-primary transition-colors duration-300 font-medium"
             >
               {link.label}
             </a>
@@ -55,7 +53,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-foreground p-2"
+          className="md:hidden text-gray-700 p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -64,12 +62,12 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-background/80 backdrop-blur-xl backdrop-saturate-150 border border-white/10 shadow-lg mt-2 mx-4 rounded-2xl p-4 animate-fade-in">
+        <div className="md:hidden bg-white shadow-lg mt-2 mx-4 rounded-lg p-4 animate-fade-in">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="block py-3 text-foreground/80 hover:text-primary transition-colors"
+              className="block py-3 text-gray-700 hover:text-primary transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.label}

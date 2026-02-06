@@ -31,9 +31,9 @@ const HeroSection = () => {
         
         <div className="container mx-auto px-4 text-center relative z-10">
           {/* Badge */}
-          <div className="mx-auto inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 glass-card px-3 sm:px-4 py-2 rounded-full mb-8 animate-fade-in max-w-full">
+          <div className="inline-flex items-center gap-2 glass-card px-3 sm:px-4 py-2 rounded-full mb-8 animate-fade-in max-w-full">
             <Zap size={16} className="text-primary shrink-0" />
-            <span className="min-w-0 text-xs sm:text-sm text-muted-foreground leading-tight whitespace-normal text-center">
+            <span className="flex-1 min-w-0 text-xs sm:text-sm text-muted-foreground leading-tight whitespace-normal">
               KI-gestützte Lösungen
             </span>
           </div>
