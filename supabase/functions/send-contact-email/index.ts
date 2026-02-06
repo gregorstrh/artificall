@@ -1,5 +1,6 @@
 import { Resend } from "npm:resend@4.1.2";
 import { createClient, SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
+import { z } from "https://deno.land/x/zod@v3.23.8/mod.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -7,11 +8,36 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-type ContactEmailPayload = {
-  name: string;
-  email: string;
-  message: string;
-};
+// Zod schema for comprehensive input validation
+const contactEmailSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, { message: "Name ist erforderlich." })
+    .max(200, { message: "Name ist zu lang (max. 200 Zeichen)." })
+    // Allow letters (including umlauts), spaces, hyphens, apostrophes
+    .regex(/^[\p{L}\p{M}\s\-'.]+$/u, { 
+      message: "Name enthält ungültige Zeichen." 
+    }),
+  email: z
+    .string()
+    .trim()
+    .min(1, { message: "E-Mail ist erforderlich." })
+    .max(320, { message: "E-Mail ist zu lang." })
+    .email({ message: "Bitte geben Sie eine gültige E-Mail-Adresse ein." }),
+  message: z
+    .string()
+    .trim()
+    .min(1, { message: "Nachricht ist erforderlich." })
+    .max(10000, { message: "Nachricht ist zu lang (max. 10.000 Zeichen)." })
+    // Disallow common script injection patterns
+    .refine(
+      (msg) => !/<script[\s>]/i.test(msg) && !/javascript:/i.test(msg) && !/on\w+\s*=/i.test(msg),
+      { message: "Nachricht enthält ungültige Inhalte." }
+    ),
+});
+
+type ContactEmailPayload = z.infer<typeof contactEmailSchema>;
 
 const TO_EMAIL = "office@artificall.at";
 // NOTE: Using resend.dev until artificall.at is verified for sending.
@@ -22,18 +48,16 @@ const FROM_EMAIL = "Artificall Website <onboarding@resend.dev>";
 const RATE_LIMIT_WINDOW_MINUTES = 15;
 const MAX_REQUESTS_PER_WINDOW = 5;
 
-function isValidEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email) && email.length <= 320;
-}
-
-function escapeHtml(value: string) {
+function escapeHtml(value: string): string {
   return value
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+    .replaceAll("'", "&#039;")
+    .replaceAll("/", "&#x2F;")
+    .replaceAll("`", "&#x60;")
+    .replaceAll("=", "&#x3D;");
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -140,33 +164,21 @@ Deno.serve(async (req) => {
       );
     }
 
-    const payload = (await req.json()) as Partial<ContactEmailPayload>;
-    const name = (payload.name ?? "").trim();
-    const email = (payload.email ?? "").trim();
-    const message = (payload.message ?? "").trim();
-
-    if (!name || !email || !message) {
-      return new Response(JSON.stringify({ error: "Bitte füllen Sie alle Felder aus." }), {
+    const rawPayload = await req.json();
+    
+    // Comprehensive validation using zod schema
+    const validationResult = contactEmailSchema.safeParse(rawPayload);
+    
+    if (!validationResult.success) {
+      const firstError = validationResult.error.errors[0]?.message || "Ungültige Eingabe.";
+      console.warn("Validation failed:", validationResult.error.errors.map(e => e.message).join(", "));
+      return new Response(JSON.stringify({ error: firstError }), {
         status: 400,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
-
-    // Validate email format
-    if (!isValidEmail(email)) {
-      return new Response(JSON.stringify({ error: "Bitte geben Sie eine gültige E-Mail-Adresse ein." }), {
-        status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      });
-    }
-
-    // Very small sanity checks (avoid obvious junk)
-    if (name.length > 200 || message.length > 10_000) {
-      return new Response(JSON.stringify({ error: "Eingabe zu lang." }), {
-        status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      });
-    }
+    
+    const { name, email, message } = validationResult.data;
 
     // Record this request for rate limiting (before sending to count even failed attempts)
     await recordRequest(supabase, clientIp);
