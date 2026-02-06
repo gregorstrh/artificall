@@ -164,33 +164,21 @@ Deno.serve(async (req) => {
       );
     }
 
-    const payload = (await req.json()) as Partial<ContactEmailPayload>;
-    const name = (payload.name ?? "").trim();
-    const email = (payload.email ?? "").trim();
-    const message = (payload.message ?? "").trim();
-
-    if (!name || !email || !message) {
-      return new Response(JSON.stringify({ error: "Bitte füllen Sie alle Felder aus." }), {
+    const rawPayload = await req.json();
+    
+    // Comprehensive validation using zod schema
+    const validationResult = contactEmailSchema.safeParse(rawPayload);
+    
+    if (!validationResult.success) {
+      const firstError = validationResult.error.errors[0]?.message || "Ungültige Eingabe.";
+      console.warn("Validation failed:", validationResult.error.errors.map(e => e.message).join(", "));
+      return new Response(JSON.stringify({ error: firstError }), {
         status: 400,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
-
-    // Validate email format
-    if (!isValidEmail(email)) {
-      return new Response(JSON.stringify({ error: "Bitte geben Sie eine gültige E-Mail-Adresse ein." }), {
-        status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      });
-    }
-
-    // Very small sanity checks (avoid obvious junk)
-    if (name.length > 200 || message.length > 10_000) {
-      return new Response(JSON.stringify({ error: "Eingabe zu lang." }), {
-        status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      });
-    }
+    
+    const { name, email, message } = validationResult.data;
 
     // Record this request for rate limiting (before sending to count even failed attempts)
     await recordRequest(supabase, clientIp);
