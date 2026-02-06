@@ -64,12 +64,12 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg mt-2 mx-4 rounded-lg p-4 animate-fade-in">
+        <div className="md:hidden bg-background/80 backdrop-blur-xl backdrop-saturate-150 border border-white/10 shadow-lg mt-2 mx-4 rounded-2xl p-4 animate-fade-in">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="block py-3 text-gray-700 hover:text-primary transition-colors"
+              className="block py-3 text-foreground/80 hover:text-primary transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.label}
