@@ -24,7 +24,7 @@ const faqs = [
   {
     question: "Warum ist artificall so viel günstiger als andere Anbieter?",
     answer:
-      "Während andere Anbieter für vergleichbare KI-Anrufagenten zwischen 39€ und 200€ monatlich verlangen – oft mit begrenzten Minuten und teuren Zusatzpaketen – bieten wir unseren Service bereits ab 74,99€/Monat ohne versteckte Kosten und ohne Minutenlimit. Dank unserer effizienten Technologie und schlanken Struktur geben wir diesen Vorteil direkt an unsere Kunden weiter.",
+      "Viele Anbieter verlangen für einen KI-Anrufagenten Fixkosten von bis zu 3.000€ und dazu monatliche Gebühren von 150€ oder mehr. Bei uns zahlen Sie einmalig 1.499€ und nur 74,99€ im Monat – ohne versteckte Kosten und ohne Minutenlimit. So sparen Sie von Anfang an.",
   },
   {
     question: "Wird meine Website auch auf Google gefunden?",
