@@ -22,9 +22,9 @@ const faqs = [
       "Unser KI-Anrufagent beherrscht Deutsch, Englisch und viele weitere Sprachen. Er erkennt automatisch die Sprache des Anrufers und antwortet entsprechend – ideal für internationale Kunden.",
   },
   {
-    question: "Wie viele Anrufe kann der KI-Agent gleichzeitig bearbeiten?",
+    question: "Warum ist artificall so viel günstiger als andere Anbieter?",
     answer:
-      "Der KI-Agent kann unbegrenzt viele Anrufe gleichzeitig entgegennehmen. Kein Anrufer muss mehr in einer Warteschleife warten – jeder wird sofort bedient.",
+      "Während andere Anbieter für vergleichbare KI-Anrufagenten zwischen 39€ und 200€ monatlich verlangen – oft mit begrenzten Minuten und teuren Zusatzpaketen – bieten wir unseren Service bereits ab 74,99€/Monat ohne versteckte Kosten und ohne Minutenlimit. Dank unserer effizienten Technologie und schlanken Struktur geben wir diesen Vorteil direkt an unsere Kunden weiter.",
   },
   {
     question: "Wird meine Website auch auf Google gefunden?",
