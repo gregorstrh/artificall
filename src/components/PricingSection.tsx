@@ -18,7 +18,7 @@ const plans = [
   {
     name: "KI-Anrufagent",
     price: "1.499",
-    monthlyPrice: "8,99",
+    monthlyPrice: "74,99",
     description: "Ideal für wachsende Unternehmen",
     features: [
       "24/7 erreichbar",
@@ -30,7 +30,7 @@ const plans = [
   {
     name: "Website + KI-Anrufagent",
     price: "1.899",
-    monthlyPrice: "8,99",
+    monthlyPrice: "74,99",
     description: "Für maximale digitale Transformation",
     features: [
       {

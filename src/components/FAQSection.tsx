@@ -14,7 +14,7 @@ const faqs = [
   {
     question: "Was beinhaltet der monatliche Servicepreis beim KI-Anrufagenten?",
     answer:
-      "Der monatliche Servicepreis von 8,99€ deckt die Telefonnummer, Hosting und Wartung des KI-Agenten sowie regelmäßige Updates ab. So bleibt Ihr Agent immer auf dem neuesten Stand.",
+      "Der monatliche Servicepreis von 74,99€ deckt die Telefonnummer, Hosting und Wartung des KI-Agenten sowie regelmäßige Updates ab. So bleibt Ihr Agent immer auf dem neuesten Stand.",
   },
   {
     question: "In welchen Sprachen kann der KI-Anrufagent sprechen?",
