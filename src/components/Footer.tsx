@@ -1,4 +1,4 @@
-import { Instagram, Linkedin } from "lucide-react";
+
 import logo from "@/assets/artificall-logo.png";
 
 const Footer = () => {
@@ -63,21 +63,6 @@ const Footer = () => {
             © {currentYear} artificall. Alle Rechte vorbehalten.
           </p>
           
-          {/* Social Links */}
-          <div className="flex gap-4">
-            {[
-              { icon: Instagram, href: "https://instagram.com/artificall.at/" },
-              { icon: Linkedin, href: "https://www.linkedin.com/company/artificall-gesbr/" },
-            ].map((social, index) => (
-              <a
-                key={index}
-                href={social.href}
-                className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-600 hover:text-primary hover:bg-primary/10 transition-colors"
-              >
-                <social.icon className="w-5 h-5" />
-              </a>
-            ))}
-          </div>
         </div>
       </div>
     </footer>
