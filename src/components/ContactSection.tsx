@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, Send } from "lucide-react";
+import { Mail, Phone, Send, Instagram, Linkedin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -99,6 +99,27 @@ const ContactSection = () => {
                   >
                     0681 81422315
                   </a>
+              </div>
+            </div>
+
+              {/* Social Links */}
+              <div className="glass-card rounded-xl p-6">
+                <h3 className="font-heading font-semibold mb-4">Social Media</h3>
+                <div className="flex gap-4">
+                  {[
+                    { icon: "Instagram", href: "https://instagram.com/artificall.at/" },
+                    { icon: "Linkedin", href: "https://www.linkedin.com/company/artificall-gesbr/" },
+                  ].map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {social.icon === "Instagram" ? <Instagram className="w-5 h-5" /> : <Linkedin className="w-5 h-5" />}
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>

@@ -57,7 +57,7 @@ const AboutSection = () => {
             <h3 className="font-heading text-xl font-bold text-foreground mb-2">
               Konstantin Nedbal
             </h3>
-            <p className="text-primary font-medium mb-3">Founder & Sales Manager</p>
+            <p className="text-primary font-medium mb-3">Founder & Developer</p>
             <p className="text-muted-foreground text-sm">
               Schüler an der HLW Haag<br />
               Zweig: Kommunikations- und Mediendesign
