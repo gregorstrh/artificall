@@ -94,10 +94,10 @@ const ContactSection = () => {
                     0660 1913034
                   </a>
                   <a 
-                    href="tel:06605752571" 
+                    href="tel:068181422315" 
                     className="block text-muted-foreground text-sm hover:text-primary transition-colors"
                   >
-                    0660 5752571
+                    0681 81422315
                   </a>
                 </div>
               </div>

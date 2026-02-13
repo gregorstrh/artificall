@@ -1,5 +1,5 @@
 import gregorImg from "@/assets/gregor-strohmayr.png";
-import simonImg from "@/assets/simon-wimmer.png";
+import konstantinImg from "@/assets/konstantin-nedbal.png";
 
 const AboutSection = () => {
   return (
@@ -49,13 +49,13 @@ const AboutSection = () => {
           <div className="text-center">
             <div className="w-48 h-48 mx-auto mb-6">
               <img 
-                src={simonImg} 
-                alt="Simon Wimmer" 
+                src={konstantinImg} 
+                alt="Konstantin Nedbal"
                 className="w-full h-full object-cover object-top"
               />
             </div>
             <h3 className="font-heading text-xl font-bold text-foreground mb-2">
-              Simon Wimmer
+              Konstantin Nedbal
             </h3>
             <p className="text-primary font-medium mb-3">Founder & Sales Manager</p>
             <p className="text-muted-foreground text-sm">
