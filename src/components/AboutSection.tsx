@@ -1,3 +1,4 @@
+import { Linkedin } from "lucide-react";
 import gregorImg from "@/assets/gregor-strohmayr.png";
 import konstantinImg from "@/assets/konstantin-nedbal.png";
 
@@ -35,9 +36,14 @@ const AboutSection = () => {
                 className="w-full h-full object-cover object-top"
               />
             </div>
-            <h3 className="font-heading text-xl font-bold text-foreground mb-2">
-              Gregor Strohmayr
-            </h3>
+            <div className="flex items-center justify-center gap-2">
+              <h3 className="font-heading text-xl font-bold text-foreground">
+                Gregor Strohmayr
+              </h3>
+              <a href="https://www.linkedin.com/in/gregor-strohmayr-96ab87379" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                <Linkedin className="w-5 h-5" />
+              </a>
+            </div>
             <p className="text-primary font-medium mb-3">Founder & Developer</p>
             <p className="text-muted-foreground text-sm">
               Schüler an der HLW Haag<br />
@@ -54,9 +60,14 @@ const AboutSection = () => {
                 className="w-full h-full object-cover object-top"
               />
             </div>
-            <h3 className="font-heading text-xl font-bold text-foreground mb-2">
-              Konstantin Nedbal
-            </h3>
+            <div className="flex items-center justify-center gap-2">
+              <h3 className="font-heading text-xl font-bold text-foreground">
+                Konstantin Nedbal
+              </h3>
+              <a href="https://www.linkedin.com/in/konstantin-nedbal-524106286" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                <Linkedin className="w-5 h-5" />
+              </a>
+            </div>
             <p className="text-primary font-medium mb-3">Founder & Developer</p>
             <p className="text-muted-foreground text-sm">
               Schüler an der HLW Haag<br />
